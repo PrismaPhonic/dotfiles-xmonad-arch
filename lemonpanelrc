@@ -1,0 +1,13 @@
+panel_height='25'
+mainfont="-zevv-peep-medium-*-normal--20-175-*-*-c-*-iso8859-15"
+powerlinefont='dejavu sans mono for Powerline:size=15:style=regular'
+iconfont="-*-ionicons-medium-r-normal-*-25-*-*-*-p-*-*-1"
+gap=15
+# From panel_colors file 
+CB1='%{B#FF99CC99}'
+CB2='%{B#FF4E4E4E}'
+CF1='%{F#FF000000}'
+CF2='%{F#FF99CC99}'
+CF3='%{F#FFD75F5F}'
+CF4='%{F#FF4E4E4E}'
+update_interval=3
