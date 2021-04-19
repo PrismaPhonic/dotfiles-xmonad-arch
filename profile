@@ -3,11 +3,31 @@
 #Set our umask
 umask 022
 
-# Set our default path
-PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:$HOME/.config/bspwm:$HOME/.config/bspwm/panel:$HOME/.bin:/usr/lib/go/bin:$HOME/go/bin:$HOME/.cargo/bin"
+# Append "$1" to $PATH when not already in.
+# This function API is accessible to scripts in /etc/profile.d
+append_path () {
+    case ":$PATH:" in
+        *:"$1":*)
+            ;;
+        *)
+            PATH="${PATH:+$PATH:}$1"
+    esac
+}
+
+# Append our default paths
+append_path '/usr/local/sbin'
+append_path '/usr/local/bin'
+append_path '/usr/bin'
+append_path '$HOME/.bin'
+append_path '/usr/local/go/bin'
+append_path '$HOME/go/bin'
+append_path '$HOME/.cargo/bin'
+append_path '$HOME/.rvm/bin'
+
+# Force PATH to be environment
 export PATH
+
 export XDG_CONFIG_HOME="$HOME/.config"
-export BSPWM_SOCKET="/tmp/bspwm-socket"
 export XDG_CONFIG_DIRS=/usr/etc/xdg:/etc/xdg
 export _JAVA_AWT_WM_NONREPARENTING=1
 
@@ -19,8 +39,16 @@ if test -d /etc/profile.d/; then
 	unset profile
 fi
 
-# Source global bash config
-if test "$PS1" && test "$BASH" && test -r /etc/bash.bashrc; then
+# Unload our profile API functions
+unset -f append_path
+
+# Source global bash config, when interactive but not posix or sh mode
+if test "$BASH" &&\
+   test "$PS1" &&\
+   test -z "$POSIXLY_CORRECT" &&\
+   test "${0#-}" != sh &&\
+   test -r /etc/bash.bashrc
+then
 	. /etc/bash.bashrc
 fi
 
@@ -29,7 +57,7 @@ unset TERMCAP
 
 # Man is much better than us at figuring this out
 unset MANPATH
+
 BROWSER=/usr/bin/firefox-developer-edition
 export GOPATH=$HOME/go
 export GOROOT=/usr/lib/go
-

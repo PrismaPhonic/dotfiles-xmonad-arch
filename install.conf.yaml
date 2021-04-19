@@ -3,68 +3,29 @@
       create: true
       relink: true
 
-- clean: ['~', '~/.config', '~/.gnupg', '~/.autorandr', '~/.bin', '/usr/share/zsh/scripts/base16-shell', '/etc']
-
 - shell:
-  - rm -r ~/.gnupg/*
-  - rm -r ~/.config/autostart
-  - rm -r ~/.config/bspwm
-  - sudo rm -r /usr/share/zsh/scripts/base16-shell/*
   - sudo rm /etc/profile
-  - rm ~/.config/compton.conf
   - rm -r ~/.config/gtk-3.0
   - rm -r ~/.config/GTKmenu
   - rm -r ~/.config/nvim
-  - rm -r ~/.config/polybar
-  - rm -r ~/.config/sxhkd
-  - rm -r ~/.config/userscripts
-  - rm -r ~/.config/wal
-  - rm -r ~/.autorandr/*
-  - rm -r ~/.bin/*
-  - rm ~/.tmux.conf
   - rm ~/.vimrc
   - rm ~/.zshrc
   - rm ~/.xinitrc
-  - rm ~/.limepanelrc
   - rm ~/.gitconfig
-  - rm ~/.lemonpanelrc
-  - sudo ln -sf $(realpath ~/dotfiles/zsh/base16-shell/*) /usr/share/zsh/scripts/base16-shell/
-  - sudo cp backgrounds/within.png /usr/share/backgrounds/within.png
+  - sudo cp backgrounds/*.png ~/wallpapers
 
 - link:
     ~/.dotfiles: ''
-    ~/.tmux.conf:
     ~/.vimrc:
     ~/.gitconfig:
     ~/.zshrc: 
     ~/.xinitrc:
-    ~/.lemonpanelrc:
-    ~/.limepanelrc:
-    ~/.fehbg:
     /etc/profile:
       path: profile
       relink: true
     ~/.config/:
       glob: true
       path: config/*
-      relink: true
-    ~/.config/Code\ -\ OSS/User/settings.json:
-      path: code/settings.json
-    ~/.gnupg/:
-      glob: true
-      path: gnupg/*
-      relink: true
-    ~/.vim/:
-      glob: true
-      path: vim/*
-      relink: true
-    ~/.autorandr/:
-      glob: true
-      path: autorandr/*
-      relink: true
-    ~/.bin/:
-      glob: true
-      path: bin/*
       relink: true
 
 - shell:

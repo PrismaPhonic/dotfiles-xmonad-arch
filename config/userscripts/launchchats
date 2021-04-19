@@ -1,5 +1,0 @@
-#!/bin/bash
-
-signal-desktop --force-device-scale-factor=2 &
-sleep 1 &
-slack --force-device-scale-factor=2

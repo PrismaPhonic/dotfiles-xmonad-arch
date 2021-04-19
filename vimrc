@@ -34,11 +34,6 @@ Plug 'rust-lang/rust.vim'
 Plug 'suan/vim-instant-markdown'
 Plug 'junegunn/goyo.vim'
 
-" C# stuff
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'tpope/vim-dispatch'
-Plug 'radenling/vim-dispatch-neovim'
-
 " Jinja2 syntax highlighting - configured to run on tera template files
 Plug 'glench/vim-jinja2-syntax'
 
