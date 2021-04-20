@@ -5,6 +5,8 @@
 
 - shell:
   - sudo rm /etc/profile
+  - sudo rm /etc/lightdm/lightdm-webkit2-greeter.conf
+  - sudo rm /etc/lightdm/lightdm.conf
   - rm -r ~/.config/gtk-3.0
   - rm -r ~/.config/GTKmenu
   - rm -r ~/.config/nvim
@@ -26,6 +28,12 @@
     ~/.config/:
       glob: true
       path: config/*
+      relink: true
+    /etc/lightdm/lightdm.conf:
+      path: lightdm.conf
+      relink: true
+    /etc/lightdm/lightdm-webkit2-greeter.conf:
+      path: lightdm-webkit2-greeter.conf
       relink: true
 
 - shell:
