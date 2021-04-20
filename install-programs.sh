@@ -38,6 +38,12 @@ rustup component add rls rust-analysis rust-src
 # Install ripgrep
 cargo install ripgrep
 
+# Install newest eww
+cargo +nightly install --git https://github.com/elkowar/eww
+
+# Remove eww from init install scripts
+sudo rm ~/bin/eww
+
 # Install NVM
 mkdir ~/.nvm
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
