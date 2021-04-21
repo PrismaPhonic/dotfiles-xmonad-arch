@@ -100,6 +100,9 @@ paru -S --noconfirm --needed neofetch
 # Install Thunderbird
 paru -S --noconfirm --needed thunderbird
 
+# Setup for auto-mounting thumb drives
+sudo pacman -S --noconfirm --needed udisk2 udiskie
+
 # Install Golang
 ./install-golang.sh
 
