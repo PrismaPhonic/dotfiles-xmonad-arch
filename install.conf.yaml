@@ -15,6 +15,8 @@
   - rm ~/.xinitrc
   - rm ~/.gitconfig
   - sudo cp backgrounds/*.png ~/wallpapers
+  - mkdir -p ~/Pictures/self
+  - cp portrait/self.jpg ~/Pictures/self/self.jpg
 
 - link:
     ~/.dotfiles: ''
