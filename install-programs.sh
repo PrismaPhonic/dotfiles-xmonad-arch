@@ -100,6 +100,10 @@ paru -S --noconfirm --needed neofetch
 # Install Thunderbird
 paru -S --noconfirm --needed thunderbird
 
+# TODO: Figure out how to properly configure this
+# Install polkit agent
+sudo pacman -S --noconfirm --needed lxsession
+
 # TODO: Find good auto mounting solution that doesn't re-mount after manual
 # unmount
 # Setup for mounting thumb drives
