@@ -3,6 +3,10 @@
 # Make sure system is fully up to date before adding new program
 sudo pacman --noconfirm -Syu
 
+# Get all the network manager goodies
+sudo pacman -S --noconfirm --needed networkmanager networkmanager-dmenu network-manager-applet
+paru -S --noconfirm --needed networkmanager-dmenu-git
+
 # Install lastpass
 sudo pacman -S --noconfirm --needed lastpass-cli
 

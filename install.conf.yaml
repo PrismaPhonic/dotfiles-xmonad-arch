@@ -14,7 +14,7 @@
   - rm ~/.zshrc
   - rm ~/.xinitrc
   - rm ~/.gitconfig
-  - rm ~/.zprofile
+  - mkdir -p ~/.config/networkmanager-dmenu
   - sudo cp backgrounds/*.png ~/wallpapers
   - mkdir -p ~/Pictures/self
   - cp portrait/self.jpg ~/Pictures/self/self.jpg
@@ -28,6 +28,9 @@
     ~/.zprofile:
     /etc/profile:
       path: profile
+      relink: true
+    /.config/networkmanager-dmenu/config.ini:
+      path: networkmanager-dmenu-config.ini
       relink: true
     ~/.config/:
       glob: true
