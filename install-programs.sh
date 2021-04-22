@@ -3,10 +3,6 @@
 # Make sure system is fully up to date before adding new program
 sudo pacman --noconfirm -Syu
 
-# Install paru
-git clone https://aur.archlinux.org/paru.gi ~/.srcs/paru
-(cd ~/.srcs/paru/ && makepkg -si)
-
 # Install lastpass
 sudo pacman -S --noconfirm --needed lastpass-cli
 

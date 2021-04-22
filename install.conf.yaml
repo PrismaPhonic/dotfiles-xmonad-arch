@@ -14,6 +14,7 @@
   - rm ~/.zshrc
   - rm ~/.xinitrc
   - rm ~/.gitconfig
+  - rm ~/.zprofile
   - sudo cp backgrounds/*.png ~/wallpapers
   - mkdir -p ~/Pictures/self
   - cp portrait/self.jpg ~/Pictures/self/self.jpg
@@ -24,6 +25,7 @@
     ~/.gitconfig:
     ~/.zshrc: 
     ~/.xinitrc:
+    ~/.zprofile:
     /etc/profile:
       path: profile
       relink: true
