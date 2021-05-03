@@ -123,3 +123,6 @@ sudo pacman -S --noconfirm --needed udisk2
 
 # Install operator-sdk deps
 ./install-operator-sdk-deps.sh
+
+# Install readyset reqs
+./install-readyset-reqs.sh
