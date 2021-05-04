@@ -64,4 +64,8 @@ cd readyset
 # Build release
 cargo build --release
 
+# Install UI deps
+sudo pacman -S --noconfirm --needed python-pip
+pip3 install pystache
+
 echo 'All finished! Please add $HOME/.cargo/bin to your PATH permanentely.'
