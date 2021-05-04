@@ -16,8 +16,10 @@ sudo pacman -Syu
 sudo pacman -S --needed --noconfirm tailscale
 
 # enable and start tailscale
-sudo systemctl enable tailscaled.service
+sudo systemctl enable --now tailscaled.service
+sleep 1
 sudo systemctl start tailscaled.service
+sleep 1
 
 # Bring tailscale up - note, this will require you clicking a link and
 # authenticating with SSO login
@@ -37,6 +39,9 @@ rustup install nightly
 # Install RLS
 rustup component add rls rust-analysis rust-src
 
+# Install mdbook
+cargo install mdbook
+
 # Install all basic deps
 ## OpenSSL is already installed by default on Arch systems.
 sudo pacman -S --needed --noconfirm base-devel clang lz4 docker
@@ -46,7 +51,10 @@ sudo systemctl enable docker.service
 sudo systemctl start docker.service
 
 # Add current user to the docker group
-sudo gpasswd -a ${whoami} docker
+sudo gpasswd -a $(whoami) docker
+
+# Install MariaDB clients
+sudo pacman -S mariadb-clients
 
 # Clone readyset repo
 eval cd "${gitrepo}"
@@ -55,3 +63,5 @@ cd readyset
 
 # Build release
 cargo build --release
+
+echo 'All finished! Please add $HOME/.cargo/bin to your PATH permanentely.'
