@@ -4,8 +4,6 @@ set -e
 
 echo Welcome to ReadySet! Let\s get you setup!
 read -p 'Clone readyset git repo to: ' gitrepo
-# Replace ~ with $HOME for better compatibility
-gitrepo="${var/#\~/$HOME}"
 
 #####################################
 ##    General Work Dependencies    ##
