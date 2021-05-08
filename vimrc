@@ -15,6 +15,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " add all your plugins here (note older versions of Vundle
 " used Bundle instead of Plugin)
+Plug 'editorconfig/editorconfig-vim'
 Plug 'tmhedberg/SimpylFold'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'tpope/vim-surround'
@@ -30,7 +31,6 @@ Plug 'tpope/vim-commentary'
 Plug 'itchyny/lightline.vim'
 Plug 'vim-scripts/localvimrc'
 Plug 'mxw/vim-jsx'
-Plug 'rust-lang/rust.vim'
 Plug 'suan/vim-instant-markdown'
 Plug 'junegunn/goyo.vim'
 
@@ -43,23 +43,23 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install -all' }
 Plug 'junegunn/fzf.vim'
 
 " Semantic language support
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/webapi-vim'
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'junegunn/vader.vim'
 
-" Completion plugins
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-tmux'
-Plug 'ncm2/ncm2-path'
+" Syntactic language support
+Plug 'cespare/vim-toml'
+Plug 'stephpy/vim-yaml'
+Plug 'rust-lang/rust.vim'
+Plug 'rhysd/vim-clang-format'
+Plug 'fatih/vim-go'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 " LanguageClient enhancements
 " " Showing function signature and inline doc.
 Plug 'Shougo/echodoc.vim'
+
+call plug#end()
 
 if has('nvim')
     set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
@@ -202,8 +202,11 @@ vnoremap <S-k> :m'<-2 <CR>gv=gv
 inoremap ( ()<Esc>:let leavechar=")"<CR>i
 inoremap [ []<Esc>:let leavechar="]"<CR>i
 inoremap {<CR> {<CR>}<Esc>ko
-
 imap <C-l> <Esc>:exec "normal f" . leavechar<CR>a
+
+" Map for copy to clipboard
+noremap <Leader>y "*y
+noremap <Leader>y "+y
 
 " Toggle NerdTree (directory) Plugin Pane
 nmap <C-b> :NERDTreeToggle<CR>
@@ -235,17 +238,22 @@ let g:ale_lint_on_enter = 0
 let g:ale_rust_cargo_use_check = 1
 let g:ale_rust_cargo_check_all_targets = 1
 
-" language server protocol
-let g:LanguageClient_settingsPath = "~/.vim/settings.json"
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'c#': ['']
-    \ }
-let g:LanguageClient_autoStart = 1
+function! s:GoToDefinition()
+  if CocAction('jumpDefinition')
+    return v:true
+  endif
 
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+  let ret = execute("silent! normal \<C-]>")
+  if ret =~ "Error" || ret =~ "错误"
+    call searchdecl(expand('<cword>'))
+  endif
+endfunction
+
+nmap <silent> gd :call <SID>GoToDefinition()<CR>
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 
 " racer + rust
 let g:rustfmt_command = "rustfmt +nightly"
@@ -255,7 +263,6 @@ let g:rustfmt_fail_silently = 0
 let g:rust_clip_command = 'xclip -selection clipboard'
 
 " Completion
-autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
 inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
@@ -266,3 +273,18 @@ let g:lightline = {
       \   'filename': 'LightlineFilename',
       \ },
 \ }
+
+" Golang
+let g:go_play_open_browser = 0
+let g:go_fmt_fail_silently = 1
+let g:go_fmt_command = "goimports"
+let g:go_bin_path = expand("~/dev/go/bin")
+
+" Rusty-Tags support
+autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/,$RUST_SRC_PATH/rusty-tags.vi
+autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
+
+highlight CocFloating ctermbg=000000
+" highlight PmenuSel ctermbg=000000
+" highlight PmenuSbar ctermbg=000000
+" highlight PmenuThumb ctermbg=000000

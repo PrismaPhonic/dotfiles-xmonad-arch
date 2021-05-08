@@ -68,4 +68,7 @@ cargo build --release
 sudo pacman -S --noconfirm --needed python-pip
 pip3 install pystache
 
+# Install graphviz package for creating useful graphs
+sudo pacman -S --noconfirm --needed graphviz
+
 echo 'All finished! Please add $HOME/.cargo/bin to your PATH permanentely.'

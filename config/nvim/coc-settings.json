@@ -1,0 +1,4 @@
+{
+  "rust-analyzer.cargo-watch.enable": false,
+  "rust-analyzer.serverPath": "/home/pmfarr/.cargo-target/release/rust-analyzer"
+}

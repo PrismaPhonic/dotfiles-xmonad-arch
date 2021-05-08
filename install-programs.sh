@@ -13,6 +13,16 @@ sudo pacman -S --noconfirm --needed lastpass-cli
 # Install neovim
 sudo pacman -S --noconfirm --needed neovim
 
+# Install ctags
+mkdir -p ~/git
+cd ~/git
+git clone https://github.com/universal-ctags/ctags.git
+cd ctags
+./autogen.sh
+./configure --prefix=/usr/local
+make
+sudo make install
+
 # Install pip
 sudo pacman -S --noconfirm --needed python-pip
 
@@ -40,6 +50,9 @@ cargo install ripgrep
 
 # Install newest eww
 cargo +nightly install --git https://github.com/elkowar/eww
+
+# Install rusty-ctags
+cargo install rusty-tags
 
 # Remove eww from init install scripts
 sudo rm ~/bin/eww
