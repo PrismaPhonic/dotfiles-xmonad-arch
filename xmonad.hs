@@ -117,6 +117,10 @@ projects =
               , projectDirectory = "~/"
               , projectStartHook = Just $ do spawnOn wsPrivate myPrivateBrowser
               }
+    , Project { projectName      = wsMusic
+              , projectDirectory = "~/"
+              , projectStartHook = Just $ do spawnOn wsMusic "spotify"
+              }
     ]
 
 -- Border colors for unfocused and focused windows, respectively.
