@@ -35,7 +35,8 @@ import Data.Ratio
 import XMonad.Actions.DynamicProjects
 import XMonad.Actions.SpawnOn
 
-myTerminal      = "alacritty"
+myTerminal       = "alacritty"
+myWorkVim        = "alacritty --working-directory ~/git/readysettech/readyset -e nvim -c :NERDTreeToggle"
 -- Preferred browser
 myBrowser        = "firefox-developer-edition"
 myPrivateBrowser = "firefox-developer-edition --private-window google.com"
@@ -89,31 +90,32 @@ projects =
 
     [ Project { projectName      = wsTerm
               , projectDirectory = "~/"
-	      , projectStartHook = Just $ do spawnOn wsTerm myTerminal
-	                                     spawnOn wsTerm myTerminal
+              , projectStartHook = Just $ do spawnOn wsTerm myTerminal
+                                             spawnOn wsTerm myTerminal
               }
 
     , Project { projectName      = wsCode
               , projectDirectory = "~/"
-	      , projectStartHook = Just $ do spawnOn wsCode "goland"
+              , projectStartHook = Just $ do spawnOn wsCode myTerminal 
+                                             spawnOn wsCode myWorkVim
               }
     , Project { projectName      = wsWorkCom
               , projectDirectory = "~/"
-	      , projectStartHook = Just $ do spawnOn wsWorkCom "slack"
-	                                     spawnOn wsWorkCom "discord"
+              , projectStartHook = Just $ do spawnOn wsWorkCom "slack"
+                                             spawnOn wsWorkCom "discord"
               }
 
     , Project { projectName      = wsPersCom
               , projectDirectory = "~/"
-	      , projectStartHook = Just $ do spawnOn wsPersCom "signal-desktop"
+              , projectStartHook = Just $ do spawnOn wsPersCom "signal-desktop"
               }
     , Project { projectName      = wsNet
               , projectDirectory = "~/"
-	      , projectStartHook = Just $ do spawnOn wsNet myBrowser
+              , projectStartHook = Just $ do spawnOn wsNet myBrowser
               }
     , Project { projectName      = wsPrivate
               , projectDirectory = "~/"
-	      , projectStartHook = Just $ do spawnOn wsPrivate myPrivateBrowser
+              , projectStartHook = Just $ do spawnOn wsPrivate myPrivateBrowser
               }
     ]
 
@@ -145,6 +147,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
     [ ((modm,               xK_z     ), spawn $ XMonad.terminal conf)
+    -- launch neovim opened up on work monorepo
+    , ((modm .|. shiftMask, xK_z     ), spawn myWorkVim)
 
     -- lock screen
     , ((modm,               xK_F1    ), spawn "betterlockscreen -l")
@@ -399,8 +403,8 @@ main = do
     xmonad 
         $ dynamicProjects projects
         $ fullscreenSupport 
-	$ docks 
-	$ ewmh defaults
+        $ docks 
+        $ ewmh defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
