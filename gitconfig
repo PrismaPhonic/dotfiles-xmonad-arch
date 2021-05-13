@@ -1,3 +1,5 @@
 [user]
 	email = Peter@PrismaPhonic.com
 	name = Peter Farr
+[merge]
+	conflictstyle = diff3

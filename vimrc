@@ -79,7 +79,7 @@ command! -bang -nargs=* Rg
   \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-\ <bang>0)
+  \ <bang>0)
 
 function! s:list_cmd()
   let base = fnamemodify(expand('%'), ':h:.:S')
@@ -88,7 +88,7 @@ endfunction
 
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
-\ 'options': '--tiebreak=index'}, <bang>0)
+  \                              'options': '--tiebreak=index'}, <bang>0)
 
 " ...
 
@@ -249,11 +249,21 @@ function! s:GoToDefinition()
   endif
 endfunction
 
+" CoC stuff
 nmap <silent> gd :call <SID>GoToDefinition()<CR>
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " racer + rust
 let g:rustfmt_command = "rustfmt +nightly"
