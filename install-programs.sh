@@ -122,6 +122,12 @@ sudo pacman -S --noconfirm --needed lxsession
 # Setup for mounting thumb drives
 sudo pacman -S --noconfirm --needed udisk2
 
+# Install emacs doom
+sudo pacman -S --noconfirm --needed emacs fd
+cd ~/
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+
 # Install Golang
 ./install-golang.sh
 
