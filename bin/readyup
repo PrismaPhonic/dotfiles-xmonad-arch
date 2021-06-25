@@ -6,7 +6,7 @@ sudo docker run --name zookeeper --restart always -p 2181:2181 -d zookeeper
 cd /home/pmfarr/git/readyset
 
 # Start Noria Server
-cargo r --release --manifest-path=/home/pmfarr/git/readyset/noria/server/Cargo.toml --bin noria-server -- --deployment myapp --no-reuse --address 127.0.0.1 --shards 0 &
+cargo r --release --manifest-path=/home/pmfarr/git/readysettech/readyset/noria/server/Cargo.toml --bin noria-server -- --deployment myapp --no-reuse --address 127.0.0.1 --shards 0 &
 
 # Start MySQL Adapter
-cargo run --release --manifest-path=/home/pmfarr/git/readyset/noria-mysql/Cargo.toml -- --deployment myapp -a 127.0.0.1:3333 --no-require-authentication --permissive &
+cargo run --release --manifest-path=/home/pmfarr/git/readysettech/readyset/noria-mysql/Cargo.toml -- --deployment myapp -a 127.0.0.1:3333 --no-require-authentication --permissive &

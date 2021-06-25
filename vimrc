@@ -298,3 +298,6 @@ highlight CocFloating ctermbg=000000
 " highlight PmenuSel ctermbg=000000
 " highlight PmenuSbar ctermbg=000000
 " highlight PmenuThumb ctermbg=000000
+
+" Remove all trailing whitespace by pressing F5
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
